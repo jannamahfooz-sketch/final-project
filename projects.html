@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Jana Mohamed</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0a192f;
+            --bg-nav: rgba(16, 33, 65, 0.8);
+            --text-main: #e6f1ff;
+            --text-dim: #8892b0;
+            --accent: #64ffda;
+            --border: rgba(100, 255, 218, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --bg-nav: rgba(255, 255, 255, 0.9);
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --accent: #0ea5e9;
+            --border: rgba(0, 0, 0, 0.05);
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            margin: 0;
+            padding-top: 120px;
+        }
+
+   
+        .navbar-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+
+        #mainNav {
+            background: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 24px;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .navbar-brand { font-family: 'Outfit'; color: var(--accent) !important; font-weight: 700; font-size: 1.1rem; }
+        .nav-link { font-size: 0.85rem; color: var(--text-main) !important; margin: 0 10px; font-weight: 500; }
+        .nav-link.active { color: var(--accent) !important; }
+        .nav-cta { background: var(--accent); color: var(--bg-color) !important; border-radius: 50px; padding: 6px 20px !important; font-size: 0.8rem; font-weight: 600; margin-left: 10px; }
+
+     
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .page-title { font-family: 'Outfit'; font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .page-subtitle { color: var(--text-dim); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+     
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .project-img-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-img-container img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay { opacity: 1; }
+
+        .card-body { padding: 25px; text-align: center; }
+        
+        .badge-tech {
+            font-size: 0.7rem;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-name { font-family: 'Outfit'; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+        .project-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+
+        .tech-icons i {
+            font-size: 1.2rem;
+            margin: 0 8px;
+            color: var(--text-dim);
+            transition: var(--transition);
+        }
+        .project-card:hover .tech-icons i { color: var(--accent); }
+
+        .btn-view {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-view:hover { background: var(--text-main); color: var(--bg-color); }
+
+        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; text-align: center; }
+
+        .theme-btn { background: none; border: none; color: var(--text-main); font-size: 1rem; cursor: pointer; margin-left: 10px; }
+
+        @media (max-width: 991px) {
+            .navbar-collapse { background: var(--bg-color); padding: 20px; border-radius: 20px; border: 1px solid var(--border); margin-top: 15px; }
+            .nav-cta { margin: 15px 0 0 0; display: inline-block; }
+        }
+    </style>
+</head>
+<body>
+
+ 
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-expand-lg" id="mainNav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">PORTFOLIO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon" style="filter: contrast(0);"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link nav-cta" href="contact.html">Contact Me</a></li>
+                        <li class="nav-item">
+                            <button class="theme-btn" id="toggleMode">🌙</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+   
+    <header class="container">
+        <div class="page-header">
+            <h1 class="page-title">Selected <span style="color: var(--accent)">Works</span></h1>
+            <p class="page-subtitle">A collection of projects where I blend technical logic with creative design.</p>
+        </div>
+    </header>
+
+    <section class="container mb-5">
+        <div class="row g-4 justify-content-center">
+            
+         
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-img-container">
+                        <img src="Screenshot 2026-03-26 182944.png" alt="Furni Project">
+                        <div class="project-overlay">
+                            <a href="https://jannamahfooz-sketch.github.io/project5../" class="btn-view">View Live</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge-tech">E-Commerce</span>
+                        <h4 class="project-name">Furni Store</h4>
+                        <p class="project-desc">Modern furniture store landing page with responsive galleries and clean UI.</p>
+                        <div class="tech-icons">
+                            <i class="fab fa-html5"></i>
+                            <i class="fab fa-css3-alt"></i>
+                            <i class="fab fa-bootstrap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-img-container">
+                        <img src="Screenshot 2026-03-26 183229.png" alt="Food Lover">
+                        <div class="project-overlay">
+                            <a href="https://jannamahfooz-sketch.github.io/project3/" class="btn-view">View Live</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge-tech">Restaurant</span>
+                        <h4 class="project-name">Food Lover</h4>
+                        <p class="project-desc">Digital menu system and reservation interface with interactive components.</p>
+                        <div class="tech-icons">
+                            <i class="fab fa-html5"></i>
+                            <i class="fab fa-css3-alt"></i>
+                            <i class="fab fa-js"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-img-container">
+                        <img src="Screenshot 2026-03-26 182715.png" alt="APPEXY">
+                        <div class="project-overlay">
+                            <a href="https://jannamahfooz-sketch.github.io/project4/" class="btn-view">View Live</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge-tech">SaaS / App</span>
+                        <h4 class="project-name">APPEXY</h4>
+                        <p class="project-desc">Creative landing page for mobile applications featuring smooth animations.</p>
+                        <div class="tech-icons">
+                            <i class="fab fa-html5"></i>
+                            <i class="fab fa-css3-alt"></i>
+                            <i class="fab fa-bootstrap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p class="mb-0">&copy; 2026 Jana Mohamed Mahfouz. Quality over quantity.</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const btn = document.getElementById('toggleMode');
+        const html = document.documentElement;
+        
+        btn.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            btn.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            btn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        }
+    </script>
+</body>
+</html>
